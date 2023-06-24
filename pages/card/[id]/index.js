@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const CardDetails = ({ result }) => {
   const router = useRouter();
@@ -13,6 +14,8 @@ const CardDetails = ({ result }) => {
       ) : (
         <p>Nenhuma informação encontrada para o id '{id}'.</p>
       )}
+      <br />
+      <Link href="/">Voltar para página inicial</Link>
     </div>
   );
 };
