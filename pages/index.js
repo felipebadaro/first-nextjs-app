@@ -1,5 +1,7 @@
 import styles from "@/styles/Home.module.css";
 import CardList from "@/components/CardList";
+import useRequest from "../hooks/useRequest";
+import { baseURLAPI } from "../config";
 
 export default function Home({ cards }) {
   return (
@@ -13,10 +15,8 @@ export default function Home({ cards }) {
 }
 
 export const getStaticProps = async () => {
-  const res = await fetch(
-    `https://jsonplaceholder.typicode.com/posts?_limit=10`
-  );
-  const cards = await res.json();
+  const suffix = "posts?_limit=10";
+  const cards = await useRequest(baseURLAPI, suffix);
 
   return {
     props: {

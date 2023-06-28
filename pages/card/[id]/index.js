@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
+import useRequest from "../../../hooks/useRequest";
+import { baseURLAPI } from "../../../config";
 
 const CardDetails = ({ result }) => {
   const router = useRouter();
@@ -23,10 +25,8 @@ const CardDetails = ({ result }) => {
 export async function getServerSideProps(context) {
   const { params, req, res } = context;
 
-  const data = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${params.id}`
-  );
-  const result = await data.json();
+  const suffix = `posts/${params.id}`;
+  const result = await useRequest(baseURLAPI, suffix);
 
   return {
     props: {
